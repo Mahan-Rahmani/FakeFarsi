@@ -9,3 +9,8 @@ Creating fake profiles can serve various purposes, from testing software applica
 In our fictional profiles project, we delve deeper into the intricacies of creating these Farsi-based personas. Let’s explore additional aspects:Address and Location:We can invent imaginary addresses, cities, and regions for our profiles.Consider incorporating elements like street names, postal codes, and even landmarks.Occupation and Interests:Assigning occupations or fields of interest to our profiles adds realism.Perhaps some profiles are engineers, artists, or avid travelers.Mention hobbies, favorite books, or sports they enjoy.Profile Pictures:Although we’re working with text, we can imagine profile pictures.Describe their appearance: hair color, eye shape, and any distinguishing features.Social Media Presence:What if our fake profiles had social media accounts?Invent usernames, hashtags they use, and posts they might share.Remember, these profiles are entirely fictional, but the more details we add, the richer they become. 
 
 Developer: Mahan Rahmani
+
+
+<a href="https://pepy.tech/project/fakefarsi">
+    <img src="https://static.pepy.tech/personalized-badge/fakefarsi?period=total&units=international_system&left_color=black&right_color=green&left_text=downloads" alt="Downloads">
+</a>
