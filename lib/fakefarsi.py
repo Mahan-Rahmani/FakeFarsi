@@ -1,5 +1,10 @@
 import random
-from data import male_names, female_names, l_names
+import sys
+
+try:
+    from .data import male_names, female_names, l_names
+except ImportError:
+    from data import male_names, female_names, l_names
 
 
 class FakeFarsi:
@@ -44,10 +49,18 @@ class FakeFarsi:
             text = text.replace(key, value)
         return text
 
-    def fake_email(self, name, lastname):
-        """Generate a fake email address."""
+    def fake_email(self, name=None, lastname=None):
+        """
+        Generate a fake email address.
+        اگر نام و فامیل داده نشود، خودش ابتدا آن‌ها را فیک تولید می‌کند.
+        """
+        if not name:
+            name = self.fake_name()
+        if not lastname:
+            lastname = self.fake_last_name()
+
         email = self.translator(name) + self.translator(lastname) + str(random.randint(1, 999)) + "@gmail.com"
-        return email.replace(" ", "")
+        return email.replace(" ", "").lower()
 
     def generate_fake_profile(self):
         """Generate a complete fake profile."""
@@ -57,11 +70,53 @@ class FakeFarsi:
         a = self.fake_age()
         p = self.fake_phone()
         e = self.fake_email(f, l)
-        s = f"نام و نام خانوادگی : {n} \nسن : {a} \nشماره تلفن : {p} \nایمیل : \n{e}"
+        s = f"نام و نام خانوادگی : {n} \nسن : {a} \nشماره تلفن : {p} \nایمیل : {e}"
         return s
 
+    def cli_menu(self):
+        """منوی خط فرمان برای تعامل مستقیم در ترمینال"""
+        while True:
+            print("\n" + "=" * 35)
+            print("     ابزار تولید داده فیک فارسی     ")
+            print("=" * 35)
+            print("1. تولید نام فیک")
+            print("2. تولید نام خانوادگی فیک")
+            print("3. تولید سن فیک")
+            print("4. تولید شماره تلفن فیک")
+            print("5. تولید ایمیل فیک (کاملاً مستقل)")
+            print("6. تولید پروفایل کامل")
+            print("7. خروج")
+            print("=" * 35)
 
-# Example usage
+            try:
+                choice = input("یک گزینه انتخاب کنید (۱ تا ۷): ").strip()
+
+                if choice == "1":
+                    print(f"\n[+] نام: {self.fake_name()}")
+                elif choice == "2":
+                    print(f"\n[+] نام خانوادگی: {self.fake_last_name()}")
+                elif choice == "3":
+                    print(f"\n[+] سن: {self.fake_age()}")
+                elif choice == "4":
+                    print(f"\n[+] شماره تلفن: {self.fake_phone()}")
+                elif choice == "5":
+                    # حالا بدون پاس دادن ورودی هم کار می‌کند!
+                    print(f"\n[+] ایمیل: {self.fake_email()}")
+                elif choice == "6":
+                    print(f"\n[+] مشخصات پروفایل کامل:\n{self.generate_fake_profile()}")
+                elif choice == "7":
+                    print("\nخروج از برنامه . <<اوقات خوبی رو براتون آرزومندیم>>")
+                    break
+                else:
+                    print("\n[-] گزینه نامعتبر!")
+            except (KeyboardInterrupt, EOFError):
+                print("\n\nخروج ناگهانی.")
+                break
+
+def run_cli():
+    """این تابع توسط pyproject.toml صدا زده می‌شود تا منو اجرا شود"""
+    instance = FakeFarsi()
+    instance.cli_menu()
+
 if __name__ == "__main__":
-    generator = FakeFarsi()
-    print(generator.generate_fake_profile())
+    run_cli()

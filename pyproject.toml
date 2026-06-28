@@ -16,3 +16,6 @@ classifiers = [
 [project.urls]
 Homepage = "https://github.com/mhnrhmni/FakeFarsi"
 Issues = "https://github.com/mhnrhmni/FakeFarsi/issues"
+
+[project.scripts]
+fakefarsi = "fakefarsi.fakefarsi:run_cli"
